@@ -152,7 +152,7 @@ export class Skill extends Component {
                             <Image source={require('./images/info.png')} />
                         </TouchableOpacity>
                         <TouchableOpacity 
-                        onPress={ () => this.state.nav.navigate("Login")}
+                        onPress={ () => this.state.nav.replace("Login")}
                         style={{width: 35, height: 35}}>
                             <Image source={require('./images/logout.png')} />
                         </TouchableOpacity>

@@ -5,12 +5,23 @@ export class Login extends Component {
     constructor({navigation}) {
         super();
         this.state = {
-          emailValue: '',
+          unameValue: '',
           passValue: '',
-          nav: navigation
+          nav: navigation,
+          data: []
         };
       }
+
+      componentDidMount() {
+        this.fetchData();
+      }
     
+      fetchData = async () => {
+        const response = await fetch("https://sanberapp-12f18.firebaseio.com/user.json");
+        const json = await response.json();
+        this.setState({ data: json });
+      };
+
     render() {
         return (
             <View style={styles.container}>
@@ -21,26 +32,32 @@ export class Login extends Component {
                     <Image source={require('./images/logo.png')} style={styles.logo} />
                 </View>
                 <View style={styles.input}>
-                    <Text style={styles.text}>E-MAIL</Text>
+                    <Text style={styles.text}>USERNAME</Text>
                     <TextInput style={styles.textInput}
-                    onChangeText={(text) => this.setState({ value: text })}
-                    state={this.state.emailValue}/>
+                    onChangeText={(text) => this.setState({ unameValue: text })}
+                    />
                 </View>
                 <View style={styles.input}>
                     <Text style={styles.text}>PASSWORD</Text>
                     <TextInput style={styles.textInput}
                     secureTextEntry={true}                   
-                    onChangeText={(text) => this.setState({ value: text })}
-                    state={this.state.passValue}/>
+                    onChangeText={(text) => this.setState({ passValue: text })}
+                    />
                 </View>
                 <TouchableOpacity 
-                onPress={ () => this.state.nav.navigate("Home")}
+                onPress={ () => {
+                  for(let i = 0; i < this.state.data.length; i++){
+                    if(this.state.unameValue === this.state.data[i].username && this.state.passValue === this.state.data[i].password){
+                      this.state.nav.replace("Home")
+                    }
+                  }
+                }}
                 style={{paddingTop: 16}}>
                     <View style={styles.button}>
                         <Text style={styles.text, {color: 'white'}}>LOGIN</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={ () => this.state.nav.navigate("Register")}>
+                <TouchableOpacity onPress={ () => this.state.nav.push("Register")}>
                     <Text style={styles.regis}>Register</Text>
                 </TouchableOpacity>
             </View>
@@ -77,7 +94,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
       },
       text: {
-        fontFamily: 'roboto',
+        fontFamily: 'Montserrat',
         fontSize: 18,
       },
       button: {

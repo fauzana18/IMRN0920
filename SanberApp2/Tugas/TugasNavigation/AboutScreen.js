@@ -14,7 +14,7 @@ export class About extends Component {
             <View style={styles.container}>
                 <View style={styles.judul}>
                     <TouchableOpacity 
-                    onPress={ () => this.state.nav.navigate("Home")}
+                    onPress={ () => this.state.nav.replace("Home")}
                     style={{width: 47, height: 34, marginRight: 60}}>
                         <Image source={require('./images/back.png')} />
                     </TouchableOpacity>

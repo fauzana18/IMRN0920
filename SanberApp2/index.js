@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import App from './Quiz 3/index';
+import App from './Tugas/TugasNavigation/index';
 import {name as appName} from './app.json';
 
 AppRegistry.registerComponent(appName, () => App);

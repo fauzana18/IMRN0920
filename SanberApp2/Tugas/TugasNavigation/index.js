@@ -23,7 +23,7 @@ const Tabs = createBottomTabNavigator();
 const TabsScreen = () => (
     <Tabs.Navigator 
     tabBarOptions={{ 
-        labelStyle: { fontSize: 30 }, 
+        labelStyle: { fontSize: 15 }, 
         activeBackgroundColor: '#ebdbb0', 
         inactiveBackgroundColor: '#FCFFE8'}} >
       <Tabs.Screen name="Skill" component={Skill} />
